@@ -32,7 +32,7 @@ export default function RootLayout({
         {appId ? (
           <WhopApp
             accentColor="orange"
-            appearance="inherit"
+            appearance="light"
             sdkOptions={{ appId }}
           >
             {children}

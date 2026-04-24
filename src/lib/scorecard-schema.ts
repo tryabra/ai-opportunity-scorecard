@@ -45,6 +45,11 @@ export const opportunityScoreSchema = z.object({
   total: z.number().int().min(5).max(25),
 });
 
+export const recommendationSchema = z.object({
+  name: z.string().min(1),
+  reason: z.string().min(1),
+});
+
 export const scorecardOpportunitySchema = z.object({
   name: z.string().min(1),
   bucket: z.string().min(1),
@@ -54,6 +59,13 @@ export const scorecardOpportunitySchema = z.object({
   recommendedMode: z.enum(recommendedModeOptions),
   estimatedToolCostRange: z.string().min(1),
   firstMove: z.string().min(1),
+  implementationOutline: z.array(z.string().min(1)).length(3),
+  automateNow: z.string().min(1),
+  keepManual: z.string().min(1),
+  watchout: z.string().min(1),
+  successSignal: z.string().min(1),
+  recommendedStack: z.array(recommendationSchema).min(1).max(3),
+  suggestedAbraAssets: z.array(recommendationSchema).max(3),
   score: opportunityScoreSchema,
 });
 

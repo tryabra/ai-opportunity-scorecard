@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useTransition } from "react";
 
 import type {
@@ -140,6 +141,21 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
   if (viewer.accessLevel === "no_access") {
     return (
       <div className="shell">
+        <section className="brand-bar">
+          <div className="brand-lockup">
+            <Image
+              alt="Abra AI"
+              className="brand-mark"
+              height={40}
+              src="/abra-mark.svg"
+              width={40}
+            />
+            <div>
+              <p className="eyebrow">Abra AI</p>
+              <p className="brand-title">Premier operator tool</p>
+            </div>
+          </div>
+        </section>
         <section className="panel empty-state">
           <h1>Access required</h1>
           <p>
@@ -154,9 +170,28 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
   if (result) {
     return (
       <div className="shell">
+        <section className="brand-bar">
+          <div className="brand-lockup">
+            <Image
+              alt="Abra AI"
+              className="brand-mark"
+              height={40}
+              src="/abra-mark.svg"
+              width={40}
+            />
+            <div>
+              <p className="eyebrow">Abra AI</p>
+              <p className="brand-title">AI Opportunity Scorecard</p>
+            </div>
+          </div>
+          <span className="tier-pill">
+            {result.tier === "premier" ? "Premier" : "Free"}
+          </span>
+        </section>
+
         <section className="hero">
           <div>
-            <p className="eyebrow">AI Opportunity Scorecard</p>
+            <p className="eyebrow">Operator priority view</p>
             <h1>Top implementation opportunities</h1>
             <p className="subtle">
               A ranked view of where AI is worth implementing first inside this
@@ -171,6 +206,11 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
         {viewer.isDevBypass ? (
           <div className="notice">Dev bypass is active for local preview.</div>
         ) : null}
+
+        <section className="panel">
+          <span className="label">Best first move</span>
+          <p className="best-first-move">{result.bestFirstMove}</p>
+        </section>
 
         <section className="panel">
           <h2>Business snapshot</h2>
@@ -243,16 +283,77 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
               </div>
 
               {result.tier === "premier" ? (
-                <div className="score-breakdown">
-                  <span className="label">Score breakdown</span>
-                  <div className="score-grid">
-                    <div>Pain: {opportunity.score.pain}</div>
-                    <div>Frequency: {opportunity.score.frequency}</div>
-                    <div>Speed to value: {opportunity.score.speedToValue}</div>
-                    <div>Automation fit: {opportunity.score.automationFit}</div>
-                    <div>Cost efficiency: {opportunity.score.costEfficiency}</div>
+                <>
+                  <div className="detail-grid">
+                    <div className="detail-card">
+                      <span className="label">Implement in this order</span>
+                      <ol className="ordered-list">
+                        {opportunity.implementationOutline.map((step) => (
+                          <li key={step}>{step}</li>
+                        ))}
+                      </ol>
+                    </div>
+
+                    <div className="detail-card">
+                      <span className="label">Automate now</span>
+                      <p>{opportunity.automateNow}</p>
+                    </div>
+
+                    <div className="detail-card">
+                      <span className="label">Keep manual</span>
+                      <p>{opportunity.keepManual}</p>
+                    </div>
+
+                    <div className="detail-card">
+                      <span className="label">Watchout</span>
+                      <p>{opportunity.watchout}</p>
+                    </div>
+
+                    <div className="detail-card">
+                      <span className="label">Success signal</span>
+                      <p>{opportunity.successSignal}</p>
+                    </div>
                   </div>
-                </div>
+
+                  <div className="detail-grid dual-grid">
+                    <div className="detail-card">
+                      <span className="label">Recommended stack</span>
+                      <ul className="detail-list">
+                        {opportunity.recommendedStack.map((item) => (
+                          <li key={item.name}>
+                            <strong>{item.name}</strong>
+                            <span>{item.reason}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {opportunity.suggestedAbraAssets.length ? (
+                      <div className="detail-card">
+                        <span className="label">Relevant Abra assets</span>
+                        <ul className="detail-list">
+                          {opportunity.suggestedAbraAssets.map((item) => (
+                            <li key={item.name}>
+                              <strong>{item.name}</strong>
+                              <span>{item.reason}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div className="score-breakdown">
+                    <span className="label">Score breakdown</span>
+                    <div className="score-grid">
+                      <div>Pain: {opportunity.score.pain}</div>
+                      <div>Frequency: {opportunity.score.frequency}</div>
+                      <div>Speed to value: {opportunity.score.speedToValue}</div>
+                      <div>Automation fit: {opportunity.score.automationFit}</div>
+                      <div>Cost efficiency: {opportunity.score.costEfficiency}</div>
+                    </div>
+                  </div>
+                </>
               ) : null}
 
               <div className="first-move">
@@ -263,17 +364,13 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
           ))}
         </section>
 
-        <section className="panel">
-          <span className="label">Best first move</span>
-          <p>{result.bestFirstMove}</p>
-        </section>
-
         {result.tier === "free" ? (
           <section className="panel upgrade-panel">
             <h2>Premier unlock</h2>
             <p>
-              Premier unlocks the full top 3 ranking, the score breakdown, and
-              the recommended implementation order.
+              Premier unlocks the full top 3 ranking, the implementation plan,
+              the recommended stack, relevant Abra assets, and the score
+              breakdown.
             </p>
           </section>
         ) : null}
@@ -283,9 +380,26 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
 
   return (
     <div className="shell">
+      <section className="brand-bar">
+        <div className="brand-lockup">
+          <Image
+            alt="Abra AI"
+            className="brand-mark"
+            height={40}
+            src="/abra-mark.svg"
+            width={40}
+          />
+          <div>
+            <p className="eyebrow">Abra AI</p>
+            <p className="brand-title">Premier operator tool</p>
+          </div>
+        </div>
+        <span className="brand-subtle">Mudd Ventures framework</span>
+      </section>
+
       <section className="hero">
         <div>
-          <p className="eyebrow">AI Opportunity Scorecard</p>
+          <p className="eyebrow">Operator priority view</p>
           <h1>Find the best place to implement AI first</h1>
           <p className="subtle">
             This tool ranks the top implementation opportunities inside a
@@ -468,7 +582,8 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
           <h2>What this tool returns</h2>
           <ul className="feature-list">
             <li>Top implementation opportunities ranked in the right order</li>
-            <li>Clear first move for the best opportunity</li>
+            <li>Clear first move and a tighter implementation sequence</li>
+            <li>Suggested tools, platform direction, and relevant Abra assets</li>
             <li>Difficulty, likely cost range, and automation fit</li>
           </ul>
         </section>
