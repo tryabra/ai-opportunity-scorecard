@@ -145,13 +145,12 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
           <div className="brand-lockup">
             <Image
               alt="Abra AI"
-              className="brand-mark"
-              height={40}
-              src="/abra-mark.svg"
-              width={40}
+              className="brand-logo"
+              height={44}
+              src="/abra-logo.png"
+              width={160}
             />
             <div>
-              <p className="eyebrow">Abra AI</p>
               <p className="brand-title">Premier operator tool</p>
             </div>
           </div>
@@ -174,13 +173,12 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
           <div className="brand-lockup">
             <Image
               alt="Abra AI"
-              className="brand-mark"
-              height={40}
-              src="/abra-mark.svg"
-              width={40}
+              className="brand-logo"
+              height={44}
+              src="/abra-logo.png"
+              width={160}
             />
             <div>
-              <p className="eyebrow">Abra AI</p>
               <p className="brand-title">AI Opportunity Scorecard</p>
             </div>
           </div>
@@ -384,13 +382,12 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
         <div className="brand-lockup">
           <Image
             alt="Abra AI"
-            className="brand-mark"
-            height={40}
-            src="/abra-mark.svg"
-            width={40}
+            className="brand-logo"
+            height={44}
+            src="/abra-logo.png"
+            width={160}
           />
           <div>
-            <p className="eyebrow">Abra AI</p>
             <p className="brand-title">Premier operator tool</p>
           </div>
         </div>
