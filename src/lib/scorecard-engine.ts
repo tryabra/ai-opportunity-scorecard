@@ -353,11 +353,34 @@ function inferCandidates(input: ScorecardInput): Candidate[] {
     });
   }
 
-  const deduped = new Map<string, Candidate>();
+  const sourcePriority: Record<Candidate["sourceType"], number> = {
+    workflow: 3,
+    bottleneck: 2,
+    inferred: 1,
+  };
+
+  const deduped = new Map<CandidateBucket, Candidate>();
   for (const candidate of seeded) {
-    const key = `${candidate.bucket}:${normalizeText(candidate.name)}`;
-    if (!deduped.has(key)) {
-      deduped.set(key, candidate);
+    const existing = deduped.get(candidate.bucket);
+
+    if (!existing) {
+      deduped.set(candidate.bucket, candidate);
+      continue;
+    }
+
+    const existingPriority = sourcePriority[existing.sourceType];
+    const candidatePriority = sourcePriority[candidate.sourceType];
+
+    if (candidatePriority > existingPriority) {
+      deduped.set(candidate.bucket, candidate);
+      continue;
+    }
+
+    if (
+      candidatePriority === existingPriority &&
+      candidate.name.length > existing.name.length
+    ) {
+      deduped.set(candidate.bucket, candidate);
     }
   }
 
