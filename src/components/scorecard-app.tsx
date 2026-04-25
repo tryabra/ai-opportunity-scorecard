@@ -143,18 +143,13 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
       <div className="shell">
         <section className="brand-bar">
           <div className="brand-lockup">
-            <div className="brand-logo-frame">
-              <Image
-                alt="Abra AI"
-                className="brand-logo"
-                height={44}
-                src="/abra-logo.png"
-                width={160}
-              />
-            </div>
-            <div>
-              <p className="brand-title">Premier operator tool</p>
-            </div>
+            <Image
+              alt="Abra AI"
+              className="brand-logo"
+              height={44}
+              src="/abra-logo.png"
+              width={160}
+            />
           </div>
         </section>
         <section className="panel empty-state">
@@ -173,15 +168,13 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
       <div className="shell">
         <section className="brand-bar">
           <div className="brand-lockup">
-            <div className="brand-logo-frame">
-              <Image
-                alt="Abra AI"
-                className="brand-logo"
-                height={44}
-                src="/abra-logo.png"
-                width={160}
-              />
-            </div>
+            <Image
+              alt="Abra AI"
+              className="brand-logo"
+              height={44}
+              src="/abra-logo.png"
+              width={160}
+            />
             <div>
               <p className="brand-title">AI Opportunity Scorecard</p>
             </div>
@@ -384,18 +377,13 @@ export function ScorecardApp({ viewer }: ScorecardAppProps) {
     <div className="shell">
       <section className="brand-bar">
         <div className="brand-lockup">
-          <div className="brand-logo-frame">
-            <Image
-              alt="Abra AI"
-              className="brand-logo"
-              height={44}
-              src="/abra-logo.png"
-              width={160}
-            />
-          </div>
-          <div>
-            <p className="brand-title">Premier operator tool</p>
-          </div>
+          <Image
+            alt="Abra AI"
+            className="brand-logo"
+            height={44}
+            src="/abra-logo.png"
+            width={160}
+          />
         </div>
         <span className="brand-subtle">Mudd Ventures framework</span>
       </section>
